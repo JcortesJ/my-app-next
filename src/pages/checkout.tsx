@@ -4,6 +4,9 @@ import { useRouter } from "next/router";
 import { Geist, Geist_Mono } from "next/font/google";
 import styles from "@/styles/Home.module.css";
 import { CartItem, CustomerData } from "@/types";
+import { sendOrder } from "@/actions/routes";
+import { useToast } from "@/hooks/useToast";
+import ToastContainer from "@/components/ToastContainer";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -27,6 +30,7 @@ export default function Checkout() {
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const router = useRouter();
+  const { toasts, showSuccess, showError, removeToast } = useToast();
 
   useEffect(() => {
     // Load cart from localStorage
@@ -94,17 +98,53 @@ export default function Checkout() {
     setIsSubmitting(true);
 
     try {
-      // Simulate API call
-      await new Promise((resolve) => setTimeout(resolve, 2000));
+      // Prepare order data
+      const orderData = {
+        customerData: {
+          numero_de_cedula: customerData.numero_de_cedula,
+          banco: customerData.banco,
+        },
+        cart,
+        total: getTotalPrice(),
+      };
+
+      // Send order
+      const response = await sendOrder(orderData);
+
+      console.log("Order response:", response);
+
+      // Check if the response indicates an error
+      if (response && response.success === false) {
+        // Show specific error message from the API
+        showError(
+          response.message || "Error al procesar la compra. Inténtalo de nuevo."
+        );
+        return;
+      }
+
+      // Success case
+      showSuccess(
+        "¡Compra realizada exitosamente! Gracias por tu compra.",
+        4000
+      );
 
       // Clear cart
       localStorage.removeItem("cart");
 
-      // Show success and redirect
-      alert("¡Compra realizada exitosamente! Gracias por tu compra.");
-      router.push("/");
-    } catch (error) {
-      alert("Error al procesar la compra. Inténtalo de nuevo.");
+      // Redirect after a short delay to allow user to see the success message
+      setTimeout(() => {
+        router.push("/");
+      }, 3000);
+    } catch (error: any) {
+      console.error("Order submission error:", error);
+
+      // Show specific error message if available, otherwise generic message
+      const errorMessage =
+        error?.response?.data?.message ||
+        error?.message ||
+        "Error al procesar la compra. Inténtalo de nuevo.";
+
+      showError(errorMessage);
     } finally {
       setIsSubmitting(false);
     }
@@ -245,6 +285,9 @@ export default function Checkout() {
           </div>
         </main>
       </div>
+
+      {/* Toast Notifications */}
+      <ToastContainer toasts={toasts} onRemoveToast={removeToast} />
     </>
   );
 }

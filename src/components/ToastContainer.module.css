@@ -1,0 +1,30 @@
+.toastContainer {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 1000;
+  pointer-events: none;
+}
+
+.toastWrapper {
+  margin-bottom: 12px;
+  pointer-events: auto;
+  transform: translateY(calc(var(--toast-index) * 4px));
+}
+
+.toastWrapper:last-child {
+  margin-bottom: 0;
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+  .toastContainer {
+    left: 20px;
+    right: 20px;
+    top: 10px;
+  }
+  
+  .toastWrapper {
+    margin-bottom: 8px;
+  }
+} 

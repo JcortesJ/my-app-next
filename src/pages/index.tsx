@@ -64,7 +64,7 @@ export default function Home() {
 
   const goToCheckout = () => {
     if (cart.length === 0) {
-      alert("Por favor agrega productos al carrito");
+      alert("Por favor agrega productos al carrito antes de continuar");
       return;
     }
     // Store cart data in localStorage for checkout page

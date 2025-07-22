@@ -7,6 +7,7 @@ import { CartItem, CustomerData } from "@/types";
 import { sendOrder } from "@/actions/routes";
 import { useToast } from "@/hooks/useToast";
 import ToastContainer from "@/components/ToastContainer";
+import Loader from "@/components/Loader";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -243,6 +244,7 @@ export default function Checkout() {
                     }
                     placeholder="Ingresa tu número de cédula"
                     className={errors.numero_de_cedula ? styles.error : ""}
+                    disabled={isSubmitting}
                   />
                   {errors.numero_de_cedula && (
                     <span className={styles.errorMessage}>
@@ -258,6 +260,7 @@ export default function Checkout() {
                     value={customerData.banco}
                     onChange={(e) => handleInputChange("banco", e.target.value)}
                     className={errors.banco ? styles.error : ""}
+                    disabled={isSubmitting}
                   >
                     <option value="">Selecciona tu banco</option>
                     {bancos.map((banco) => (
@@ -276,15 +279,36 @@ export default function Checkout() {
                   className={styles.submitBtn}
                   disabled={isSubmitting}
                 >
-                  {isSubmitting
-                    ? "Procesando..."
-                    : `Finalizar Compra - $${getTotalPrice().toLocaleString()}`}
+                  {isSubmitting ? (
+                    <div className={styles.buttonContent}>
+                      <Loader size="small" color="white" />
+                      <span>Procesando compra...</span>
+                    </div>
+                  ) : (
+                    `Finalizar Compra - $${getTotalPrice().toLocaleString()}`
+                  )}
                 </button>
               </form>
             </div>
           </div>
         </main>
       </div>
+
+      {/* Loading Overlay */}
+      {isSubmitting && (
+        <div className={styles.loadingOverlay}>
+          <div className={styles.loadingContent}>
+            <Loader
+              size="large"
+              color="primary"
+              text="Procesando tu compra..."
+            />
+            <p className={styles.loadingMessage}>
+              Por favor espera mientras confirmamos tu pedido
+            </p>
+          </div>
+        </div>
+      )}
 
       {/* Toast Notifications */}
       <ToastContainer toasts={toasts} onRemoveToast={removeToast} />

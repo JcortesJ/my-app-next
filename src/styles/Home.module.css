@@ -369,6 +369,13 @@
   border-color: var(--error-color);
 }
 
+.formGroup input:disabled,
+.formGroup select:disabled {
+  background-color: var(--gray-alpha-100);
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
 .errorMessage {
   display: block;
   color: var(--error-color);
@@ -399,6 +406,45 @@
   opacity: 0.7;
   cursor: not-allowed;
   transform: none;
+}
+
+/* Loading States */
+.buttonContent {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.loadingOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  backdrop-filter: blur(4px);
+}
+
+.loadingContent {
+  background: var(--background);
+  padding: 40px;
+  border-radius: 16px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  text-align: center;
+  max-width: 400px;
+  margin: 20px;
+}
+
+.loadingMessage {
+  margin-top: 16px;
+  color: #6b7280;
+  font-size: 0.95rem;
+  line-height: 1.5;
 }
 
 /* Responsive Design */
@@ -466,6 +512,15 @@
   .customerForm,
   .orderSummary {
     padding: 16px;
+  }
+
+  .loadingContent {
+    padding: 24px;
+    margin: 16px;
+  }
+
+  .loadingMessage {
+    font-size: 0.9rem;
   }
 }
 

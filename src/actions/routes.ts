@@ -86,6 +86,9 @@ export const genericRequestService = async ({
           case 422:
             userFriendlyMessage =
               "Los datos enviados no pueden ser procesados. Verifica la información.";
+          case 418:
+            userFriendlyMessage =
+              "Ha ocurrido un error al procesar la compra. Por favor intenta de nuevo.";
             break;
           case 500:
           case 502:
@@ -131,7 +134,7 @@ export const sendOrder = async (orderData: {
 }) => {
   const response = await genericRequestService({
     config: {
-      url: "https://api.example.com/orders",
+      url: "https://backend-parcial.onrender.com/checkout",
       method: "POST",
     },
     body: {

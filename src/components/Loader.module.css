@@ -1,0 +1,114 @@
+.loaderContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.spinner {
+  display: inline-block;
+  position: relative;
+}
+
+.spinner .circle {
+  position: absolute;
+  border-radius: 50%;
+  animation: rotate 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+}
+
+.spinner .circle:nth-child(1) {
+  animation-delay: -0.45s;
+}
+
+.spinner .circle:nth-child(2) {
+  animation-delay: -0.3s;
+}
+
+.spinner .circle:nth-child(3) {
+  animation-delay: -0.15s;
+}
+
+/* Sizes */
+.small {
+  width: 20px;
+  height: 20px;
+}
+
+.small .circle {
+  width: 4px;
+  height: 4px;
+  top: 8px;
+  left: 8px;
+}
+
+.medium {
+  width: 32px;
+  height: 32px;
+}
+
+.medium .circle {
+  width: 6px;
+  height: 6px;
+  top: 13px;
+  left: 13px;
+}
+
+.large {
+  width: 48px;
+  height: 48px;
+}
+
+.large .circle {
+  width: 8px;
+  height: 8px;
+  top: 20px;
+  left: 20px;
+}
+
+/* Colors */
+.primary .circle {
+  background: #22c55e;
+}
+
+.white .circle {
+  background: white;
+}
+
+.gray .circle {
+  background: #6b7280;
+}
+
+.text {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #6b7280;
+  text-align: center;
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Button Loader Variant */
+.buttonLoader {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.buttonLoader .spinner {
+  width: 16px;
+  height: 16px;
+}
+
+.buttonLoader .circle {
+  width: 3px;
+  height: 3px;
+  top: 6.5px;
+  left: 6.5px;
+} 

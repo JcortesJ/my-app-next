@@ -138,11 +138,9 @@ export const sendOrder = async (orderData: {
       method: "POST",
     },
     body: {
-      order: {
-        precio: orderData.total,
-        cedula: orderData.customerData.numero_de_cedula,
-        banco: orderData.customerData.banco,
-      },
+      precio: orderData.total,
+      cedula: orderData.customerData.numero_de_cedula,
+      banco: orderData.customerData.banco,
     },
     params: {},
   });

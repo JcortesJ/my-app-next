@@ -134,7 +134,7 @@ export const sendOrder = async (orderData: {
 }) => {
   const response = await genericRequestService({
     config: {
-      url: "https://backend-parcial.onrender.com/checkout",
+      url: "https://backend-parcial.onrender.com/compra",
       method: "POST",
     },
     body: {

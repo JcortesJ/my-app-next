@@ -116,6 +116,7 @@ export default function Checkout() {
 
       // Check if the response indicates an error
       if (response && response.success === false) {
+        console.log("response", response);
         // Show specific error message from the API
         showError(
           response.message || "Error al procesar la compra. Inténtalo de nuevo."

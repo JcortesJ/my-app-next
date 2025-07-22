@@ -15,28 +15,7 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-const bancos = [
-  "Banco de Bogotá",
-  "Bancolombia",
-  "Banco Popular",
-  "BBVA Colombia",
-  "Banco de Occidente",
-  "Banco Caja Social",
-  "Banco AV Villas",
-  "Banco Falabella",
-  "Scotiabank Colpatria",
-  "Banco Cooperativo Coopcentral",
-  "Banco Pichincha",
-  "Banco Santander",
-  "Banco Itaú",
-  "Banco GNB Sudameris",
-  "Bancamía",
-  "Banco Mundo Mujer",
-  "Banco Finandina",
-  "Banco Serfinanza",
-  "Nequi",
-  "Daviplata",
-];
+const bancos = ["Bancolombia"];
 
 export default function Checkout() {
   const [cart, setCart] = useState<CartItem[]>([]);
@@ -77,10 +56,11 @@ export default function Checkout() {
 
   const validateForm = (): boolean => {
     const newErrors: { [key: string]: string } = {};
-
+    /*
     if (!customerData.cedula.trim()) {
       newErrors.cedula = "El tipo de cédula es requerido";
     }
+      */
 
     if (!customerData.numero_de_cedula.trim()) {
       newErrors.numero_de_cedula = "El número de cédula es requerido";
@@ -189,8 +169,10 @@ export default function Checkout() {
             <div className={styles.customerForm}>
               <h2>Información Personal</h2>
               <form onSubmit={handleSubmit}>
+                {/*
                 <div className={styles.formGroup}>
-                  <label htmlFor="cedula">Tipo de Cédula *</label>
+                  
+                  <label htmlFor="cedula">Tipo de Cédula</label>
                   <select
                     id="cedula"
                     value={customerData.cedula}
@@ -209,7 +191,7 @@ export default function Checkout() {
                     <span className={styles.errorMessage}>{errors.cedula}</span>
                   )}
                 </div>
-
+                */}
                 <div className={styles.formGroup}>
                   <label htmlFor="numero_de_cedula">Número de Cédula *</label>
                   <input

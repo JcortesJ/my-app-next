@@ -27,6 +27,7 @@ export const sampleProducts: Product[] = [
     image: "/headphones.svg",
     stock: 25,
   },
+  /*
   {
     id: "4",
     name: 'Tablet 10"',
@@ -51,4 +52,5 @@ export const sampleProducts: Product[] = [
     image: "/camera.svg",
     stock: 6,
   },
+  */
 ];
